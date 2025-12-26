@@ -22,8 +22,8 @@ export const HOUSES: Record<string, House> = {
     id: 'slytherin',
     name: 'Slytherin',
     colors: {
-      primary: '#1A472A',
-      secondary: '#5D5D5D',
+      primary: '#2a623d',
+      secondary: '#5d5d5d',
       text: '#333333'
     }  
   },
@@ -31,8 +31,8 @@ export const HOUSES: Record<string, House> = {
     id: 'hufflepuff',
     name: 'Hufflepuff',
     colors: {
-      primary: '#FFD800',
-      secondary: '#000000',
+      primary: '#ecb939',
+      secondary: '#372e29',
       text: '#333333'
     }
   },
@@ -40,7 +40,7 @@ export const HOUSES: Record<string, House> = {
     id: 'ravenclaw',
     name: 'Ravenclaw',
     colors: {
-      primary: '#0E1A40', 
+      primary: '#000A90', 
       secondary: '#946B2D', 
       text: '#333333'
     }

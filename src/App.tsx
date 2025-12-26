@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from 'react';
-import Navigation from './components/Navigation/Navigation'
+import Navigation from './components/Navigation'
 import NotFound from "./pages/NotFound";
 import { useHouseStore } from '@/stores/useHouseStore';
 import { HOUSES } from '@/constants/houses';
@@ -26,7 +26,6 @@ function App() {
   }, [selectedHouse]);
   /**@todo
    * Multi language support
-   * Add unit and integration tests
    */
   return (
     <div className='wrapper-content min-h-screen bg-magic-parchment p-2'>      

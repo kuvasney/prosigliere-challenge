@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import HousesCombo from "../HousesCombo";
+import HousesCombo from "./HousesCombo";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
