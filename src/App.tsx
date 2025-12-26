@@ -1,12 +1,15 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from 'react';
 import Navigation from './components/Navigation/Navigation'
-import Characters from "./pages/Characters";
-import Character from "./pages/Character";
+import NotFound from "./pages/NotFound";
 import { useHouseStore } from '@/stores/useHouseStore';
 import { HOUSES } from '@/constants/houses';
 
-import './App.css'
+const Characters = lazy(() => import('./pages/Characters'));
+const Students = lazy(() => import('./pages/Students'));
+const Staff = lazy(() => import('./pages/Staff'));
+const Character = lazy(() => import('./pages/Character'));
 
 function App() {
   const { selectedHouse } = useHouseStore();
@@ -24,18 +27,21 @@ function App() {
   /**@todo
    * Multi language support
    * Add unit and integration tests
-   * Improve accessibility
-   * Improve responsive design
    */
   return (
-    <div className='wrapper-content min-h-screen bg-magic-parchment p-8  font-body'>      
+    <div className='wrapper-content min-h-screen bg-magic-parchment p-2'>      
       <Navigation />
       <main className='main-content'>
-        <Routes>
-          <Route path="/*" element={<div>Home Page</div>} />
-          <Route path="/characters/*" element={<Characters />} />
-          <Route path="/character/:id" element={<Character />} />
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<Characters />} />
+            <Route path="/characters/" element={<Characters />} />
+            <Route path="/students/" element={<Students />} />
+            <Route path="/staff/" element={<Staff />} />
+            <Route path="/character/:id" element={<Character />} />          
+            <Route path="/*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </main>
     </div>
   )

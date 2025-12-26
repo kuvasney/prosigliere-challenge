@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { HOUSES_ARRAY } from "@/constants/houses";
 import { useHouseStore } from "@/stores/useHouseStore";
 import type { House } from "@/constants/houses";
@@ -9,13 +9,18 @@ interface HousesComboProps {
 
 export default function HousesCombo({ onHouseSelect }: HousesComboProps) {
   const { selectedHouse, setSelectedHouse } = useHouseStore();
+  const onHouseSelectRef = useRef(onHouseSelect);
+
+  useEffect(() => {
+    onHouseSelectRef.current = onHouseSelect;
+  });
 
   useEffect(() => {
     if (selectedHouse) {
       const house = HOUSES_ARRAY.find(h => h.id === selectedHouse) || null;
-      onHouseSelect?.(house);
+      onHouseSelectRef.current?.(house);
     }
-  }, [onHouseSelect, selectedHouse]);
+  }, [selectedHouse]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const houseId = e.target.value;
@@ -28,8 +33,8 @@ export default function HousesCombo({ onHouseSelect }: HousesComboProps) {
   const currentHouse = HOUSES_ARRAY.find(h => h.id === selectedHouse);
 
   return (
-    <div className="flex items-center gap-4">
-      <label htmlFor="house-select" className="text-lg whitespace-nowrap text-house-text">
+    <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 w-full md:w-auto px-4 md:px-0">
+      <label htmlFor="house-select" className="text-base md:text-lg whitespace-nowrap text-house-text">
         Choose Your Favorite House:
       </label>
       
@@ -37,7 +42,7 @@ export default function HousesCombo({ onHouseSelect }: HousesComboProps) {
         id="house-select"
         value={selectedHouse}
         onChange={handleChange}
-        className="flex-1 px-4 py-2 border-2 rounded-lg font-cormorant text-lg"
+        className="w-full md:flex-1 px-4 py-2 border-2 rounded-lg font-cormorant text-base md:text-lg bg-white"
         style={{
           borderColor: currentHouse?.colors.primary || '#d1d5db',
           color: currentHouse?.colors.primary || '#374151',

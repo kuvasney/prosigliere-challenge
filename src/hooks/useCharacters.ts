@@ -31,3 +31,21 @@ export const useCharactersInfinite = (pageSize: number = 20) => {
     staleTime: 1000 * 60 * 5,
   });
 };
+
+export const useStudents = () => {
+  return useQuery<Character[], Error>({
+    queryKey: ["students"],
+    queryFn: charactersService.getStudents,
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
+  });
+};
+
+export const useStaff = () => {
+  return useQuery<Character[], Error>({
+    queryKey: ["staff"],
+    queryFn: charactersService.getStaff,
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
+  });
+};

@@ -16,8 +16,8 @@ export const API_CONFIG: ApiConfig = {
 export const API_ENDPOINTS: ApiEndpoints = {
   characters: "/api/characters",
   character: "/api/character",
-  students: "/api/students",
-  staff: "/api/staff",
+  students: "/api/characters/students",
+  staff: "/api/characters/staff",
   house: "/api/characters/house/",
   spells: "/api/spells",
 };

@@ -11,5 +11,5 @@ export default function Gender({ gender }: GenderProps) {
     return <span title="Female">♀️</span>;
   }
   
-  return <span title="Unknown"></span>;
+  return <span title="Unknown">{null}</span>;
 }

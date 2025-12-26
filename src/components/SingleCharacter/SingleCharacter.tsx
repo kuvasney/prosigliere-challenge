@@ -1,11 +1,13 @@
-import { NavLink, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useCharacter } from "@/hooks/useCharacters";
 import Gender from "../Gender";
 import SetFavorite from "../SetFavorite";
 import CharacterImage from "../CharacterImage";
+import SingleCharacterSkeleton from "./SingleCharacterSkeleton";
 
 export default function SingleCharacter() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { data, isLoading, isError, error } = useCharacter(id || "");
   const character = data;    
   
@@ -13,15 +15,9 @@ export default function SingleCharacter() {
     const [day, month, year] = dateString.split('-');
     return new Date(`${year}-${month}-${day}`).toLocaleDateString();
   };
-  
-    
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[400px]">
-        <p className="text-lg text-gray-600">Loading characters...</p>
-      </div>
-    );
+    return <SingleCharacterSkeleton />;
   }
 
   if (isError) {
@@ -34,7 +30,12 @@ export default function SingleCharacter() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <NavLink to="/characters" className="text-blue-500 hover:underline mb-4 inline-block">Back to All Characters</NavLink>
+      <button 
+        onClick={() => { void navigate(-1); }} 
+        className="text-blue-500 hover:underline mb-4 inline-block cursor-pointer"
+      >
+        ← Back
+      </button>
       <h3 className="font-almendra text-3xl mb-6 text-house-primary text-shadow-readable">{character?.name} <Gender gender={character?.gender} /> 
       {!character?.alive && (<span className="italic text-sm">
         (In Memoriam)

@@ -25,7 +25,7 @@ export default function CharacterImage({ src, alt, name, square }: CharacterImag
     .toUpperCase();
 
   return (
-    <div className="w-full h-64 rounded-md mb-4 flex items-center justify-center bg-gradient-to-br from-house-primary to-house-secondary relative overflow-hidden">
+    <div className={`w-full rounded-md mb-4 flex items-center justify-center bg-gradient-to-br from-house-primary to-house-secondary relative overflow-hidden ${square ? 'h-64' : 'h-auto aspect-square'}`}>
       <svg 
         className="absolute w-32 h-32 opacity-20"
         viewBox="0 0 24 24" 

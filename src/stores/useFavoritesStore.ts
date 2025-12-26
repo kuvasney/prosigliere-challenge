@@ -29,6 +29,6 @@ export const useFavoritesStore = create<FavoritesState>()(
         }
       },
     }),
-    { name: 'favorites-storage' } // key no localStorage
+    { name: 'favorites-storage' }
   )
 );
