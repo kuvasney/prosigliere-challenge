@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useCharacter } from "@/hooks/useCharacters";
+import { formatDateOfBirth } from "@/utils/formatDate";
 import Gender from "../Gender";
 import SetFavorite from "../SetFavorite";
 import CharacterImage from "../CharacterImage";
@@ -9,12 +10,7 @@ export default function SingleCharacter() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { data, isLoading, isError, error } = useCharacter(id || "");
-  const character = data;    
-  
-  const formatDateOfBirth = (dateString: string) => {
-    const [day, month, year] = dateString.split('-');
-    return new Date(`${year}-${month}-${day}`).toLocaleDateString();
-  };
+  const character = data;
 
   if (isLoading) {
     return <SingleCharacterSkeleton />;
